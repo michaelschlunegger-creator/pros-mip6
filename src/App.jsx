@@ -1,41 +1,97 @@
-import TopNav from './components/TopNav';
-import ComparisonCard from './components/ComparisonCard';
-import SummaryPanel from './components/SummaryPanel';
+import { useMemo, useState } from 'react';
+import { MATERIALS } from './data/materials';
+import { compareMaterials } from './utils/similarityEngine';
+import MaterialSelector from './components/MaterialSelector';
+import DifferencesTable from './components/DifferencesTable';
+import IntelligencePanel from './components/IntelligencePanel';
 
-const materials = [
-  {
-    id: 'mat-a',
-    name: 'Aerospace Aluminum A220',
-    specs: ['Density: 2.7 g/cm³', 'Tensile Strength: 540 MPa', 'Thermal Stability: High'],
-    cost: '$1,420 / batch',
-    sustainability: '78 / 100',
-  },
-  {
-    id: 'mat-b',
-    name: 'Carbon Composite C90',
-    specs: ['Density: 1.8 g/cm³', 'Tensile Strength: 620 MPa', 'Thermal Stability: Very High'],
-    cost: '$1,860 / batch',
-    sustainability: '64 / 100',
-  },
+const categories = [
+  'Ball Bearings',
+  'Screws',
+  'Valves',
+  'Bushings',
+  'Gaskets',
+  'Hydraulic Fittings',
+  'Electric Motors',
+  'Seals',
+  'Couplings',
+  'Fasteners (Other)',
 ];
 
 function App() {
+  const [category, setCategory] = useState('Screws');
+  const [materialAId, setMaterialAId] = useState('');
+  const [materialBId, setMaterialBId] = useState('');
+  const [comparison, setComparison] = useState(null);
+
+  const categoryMaterials = useMemo(
+    () => MATERIALS.filter((item) => item.category === category),
+    [category],
+  );
+
+  const materialA = categoryMaterials.find((m) => m.id === materialAId) || null;
+  const materialB = categoryMaterials.find((m) => m.id === materialBId) || null;
+
+  const onCategoryChange = (value) => {
+    setCategory(value);
+    setMaterialAId('');
+    setMaterialBId('');
+    setComparison(null);
+  };
+
+  const onCompare = () => {
+    setComparison(compareMaterials(materialA, materialB));
+  };
+
   return (
     <div className="app-shell">
-      <TopNav />
+      <header className="top-nav">
+        <div className="brand">PROSOL MIP</div>
+      </header>
 
       <main className="content">
-        <section className="dashboard-header">
-          <h1>Material Comparison Dashboard</h1>
+        <section className="panel">
+          <h1>PROSOL MIP – Duplicate Resolution Simulator</h1>
+          <div className="controls-grid">
+            <label className="control-group">
+              <span>Main Category</span>
+              <select value={category} onChange={(e) => onCategoryChange(e.target.value)}>
+                {categories.map((item) => (
+                  <option key={item} value={item}>
+                    {item}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <MaterialSelector
+              label="Material A"
+              options={categoryMaterials}
+              value={materialAId}
+              onChange={setMaterialAId}
+              disabled={!categoryMaterials.length}
+            />
+            <MaterialSelector
+              label="Material B"
+              options={categoryMaterials}
+              value={materialBId}
+              onChange={setMaterialBId}
+              disabled={!categoryMaterials.length}
+            />
+          </div>
+          <button className="compare-button" onClick={onCompare} disabled={!materialA || !materialB || materialAId === materialBId}>
+            Compare
+          </button>
         </section>
 
-        <section className="comparison-grid" aria-label="Material comparison cards">
-          {materials.map((material) => (
-            <ComparisonCard key={material.id} material={material} />
-          ))}
-        </section>
+        {comparison && (
+          <section className="panel score-panel">
+            <p>Duplicate Similarity Score: <strong>{comparison.score}%</strong></p>
+            <span className="score-badge">{comparison.score >= 70 ? 'Potential Duplicate' : 'Distinct Items'}</span>
+          </section>
+        )}
 
-        <SummaryPanel />
+        <DifferencesTable materialA={materialA} materialB={materialB} />
+        <IntelligencePanel materialA={materialA} materialB={materialB} score={comparison?.score ?? 0} />
       </main>
     </div>
   );
