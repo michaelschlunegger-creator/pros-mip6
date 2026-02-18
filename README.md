@@ -9,4 +9,4 @@ Open the GitHub Pages site URL:
 `https://<user>.github.io/<repo>/`
 
 This app runs directly from root `index.html` with CDN React and embedded offline data.
-Deployment Test
+Deployment Test.
