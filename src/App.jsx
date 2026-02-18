@@ -91,7 +91,7 @@ function App() {
         )}
 
         <DifferencesTable materialA={materialA} materialB={materialB} />
-        <IntelligencePanel materialA={materialA} materialB={materialB} score={comparison?.score ?? 0} />
+        <IntelligencePanel materialA={materialA} materialB={materialB} comparison={comparison} />
       </main>
     </div>
   );
