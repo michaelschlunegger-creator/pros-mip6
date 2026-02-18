@@ -46,7 +46,7 @@ function App() {
   return (
     <div className="app-shell">
       <header className="top-nav">
-        <div className="brand">PROSOL MIP</div>
+        <div className="brand">CODA • PROSOL MIP (Repo2)</div>
       </header>
 
       <main className="content">
@@ -91,7 +91,7 @@ function App() {
         )}
 
         <DifferencesTable materialA={materialA} materialB={materialB} />
-        <IntelligencePanel materialA={materialA} materialB={materialB} score={comparison?.score ?? 0} />
+        <IntelligencePanel materialA={materialA} materialB={materialB} comparison={comparison} />
       </main>
     </div>
   );

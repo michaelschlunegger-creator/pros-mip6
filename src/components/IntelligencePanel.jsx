@@ -31,16 +31,50 @@ function makeFeatureDetail(name, materialA, materialB, score) {
   };
 }
 
-function IntelligencePanel({ materialA, materialB, score }) {
+function hashVariation(seed, index) {
+  const seedValue = seed.split('').reduce((sum, ch) => sum + ch.charCodeAt(0), 0);
+  return ((seedValue + index * 13) % 17) - 8;
+}
+
+function buildSavingsProfile(index, name, comparison, materialA, materialB) {
+  const similarity = comparison?.score ?? 0;
+  const costA = Number(materialA?.cost ?? 0);
+  const costB = Number(materialB?.cost ?? 0);
+  const maxCost = Math.max(costA, costB, 1);
+  const costDeltaPct = Math.min(100, Math.round((Math.abs(costA - costB) / maxCost) * 100));
+  const variation = hashVariation(name, index);
+
+  const weighted = similarity * 0.7 + costDeltaPct * 0.25 + 10 + variation;
+  const score = Math.max(0, Math.min(100, Math.round(weighted)));
+  const tier = score >= 70 ? 'High' : score >= 40 ? 'Medium' : 'Low';
+
+  const riskSignals = (comparison?.differences?.length ?? 0) + (materialA?.applicationNotes ? 1 : 0) + (materialB?.applicationNotes ? 1 : 0);
+  const confidenceScore = Math.max(0, Math.min(100, Math.round(similarity - (riskSignals - 2) * 4 + variation)));
+  const level = confidenceScore >= 75 ? 'High' : confidenceScore >= 50 ? 'Medium' : 'Low';
+
+  return { score, tier, confidence: { level, score: confidenceScore } };
+}
+
+function IntelligencePanel({ materialA, materialB, comparison }) {
+  const score = comparison?.score ?? 0;
   if (!materialA || !materialB || score < 70) return null;
 
   return (
     <details className="panel" open>
       <summary>PROSOL VALUE-ADDED INTELLIGENCE ANALYSIS</summary>
       <div className="feature-grid">
-        {featureNames.map((name) => (
-          <FeatureAnalysis key={name} title={name} detail={makeFeatureDetail(name, materialA, materialB, score)} />
-        ))}
+        {featureNames.map((name, index) => {
+          const savings = buildSavingsProfile(index, name, comparison, materialA, materialB);
+          return (
+            <FeatureAnalysis
+              key={name}
+              title={name}
+              detail={makeFeatureDetail(name, materialA, materialB, score)}
+              savings={{ score: savings.score, tier: savings.tier }}
+              confidence={savings.confidence}
+            />
+          );
+        })}
       </div>
     </details>
   );
