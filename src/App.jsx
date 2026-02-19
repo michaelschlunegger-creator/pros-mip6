@@ -19,6 +19,14 @@ const categories = [
   'Fasteners (Other)',
 ];
 
+const fathimHints = [
+  'Can I downgrade this spec safely?',
+  'How do I validate equivalence?',
+  'What’s the quickest saving lever?',
+  'Any risks with lead time?',
+  'Which change is low effort?',
+];
+
 function App() {
   const [category, setCategory] = useState('Screws');
   const [materialAId, setMaterialAId] = useState('');
@@ -92,10 +100,16 @@ function App() {
             </button>
             <div className="mockup-wrap">
               <button className="fathim-button" onClick={onAskFathimAI} type="button">
-                Ask FathimaAI
+                Ask FathimAI
               </button>
-              {showMockupNote && <span className="mockup-toast">FathimaAI is a mockup in this version.</span>}
+              {showMockupNote && <span className="mockup-toast">FathimAI is a mockup in this version.</span>}
             </div>
+          </div>
+
+          <div className="hint-chip-row" aria-label="FathimAI example prompts">
+            {fathimHints.map((hint) => (
+              <span key={hint} className="hint-chip">{hint}</span>
+            ))}
           </div>
         </section>
 
