@@ -1,9 +1,10 @@
-function SavingsDial({ score, tier }) {
+function SavingsDial({ score }) {
   const radius = 28;
   const stroke = 7;
   const normalizedRadius = radius - stroke / 2;
   const circumference = 2 * Math.PI * normalizedRadius;
   const dashoffset = circumference - (score / 100) * circumference;
+  const tier = score >= 70 ? 'High' : score >= 40 ? 'Medium' : 'Low';
 
   return (
     <div className="savings-dial" aria-label={`Savings Potential ${score} (${tier})`}>
@@ -29,28 +30,59 @@ function SavingsDial({ score, tier }) {
   );
 }
 
-function FeatureAnalysis({ title, detail, savings, confidence }) {
+function renderList(items) {
+  return (
+    <ul>
+      {items.map((item) => (
+        <li key={item}>{item}</li>
+      ))}
+    </ul>
+  );
+}
+
+function FeatureAnalysis({ module }) {
   return (
     <article className="feature-card">
       <div className="feature-top">
-        <h4>{title}</h4>
-        <span className={`confidence-pill ${confidence.level.toLowerCase()}`}>Confidence: {confidence.level}</span>
+        <h4>{module.title}</h4>
+        <span className={`confidence-pill ${module.confidence.toLowerCase()}`}>Confidence: {module.confidence}</span>
       </div>
-      <SavingsDial score={savings.score} tier={savings.tier} />
-      <ul>
-        <li>
-          <strong>What is identical:</strong> {detail.identical}
-        </li>
-        <li>
-          <strong>What differs:</strong> {detail.differs}
-        </li>
-        <li>
-          <strong>Business impact:</strong> {detail.impact}
-        </li>
-        <li>
-          <strong>Recommended action:</strong> {detail.action}
-        </li>
-      </ul>
+
+      <SavingsDial score={module.savingsScore} />
+
+      <p><strong>Business impact:</strong> {module.impactText}</p>
+      <p><strong>Recommended action:</strong> {module.actionText}</p>
+
+      <details className="feature-detail-block" open>
+        <summary>Verification steps</summary>
+        {renderList(module.verificationSteps)}
+      </details>
+
+      <details className="feature-detail-block" open>
+        <summary>Downstream impacts</summary>
+        <ul>
+          {module.downstreamImpacts.map((impact) => (
+            <li key={`${impact.area}-${impact.effect}`}><strong>{impact.area}:</strong> {impact.effect}</li>
+          ))}
+        </ul>
+      </details>
+
+      {!!module.warnings.length && (
+        <details className="feature-detail-block" open>
+          <summary>Warnings</summary>
+          {renderList(module.warnings)}
+        </details>
+      )}
+
+      <details className="feature-detail-block" open>
+        <summary>Savings levers</summary>
+        {renderList(module.savingsLevers)}
+      </details>
+
+      <details className="feature-detail-block">
+        <summary>Key drivers</summary>
+        {renderList(module.keyDrivers)}
+      </details>
     </article>
   );
 }

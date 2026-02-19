@@ -4,6 +4,7 @@ import { compareMaterials } from './utils/similarityEngine';
 import MaterialSelector from './components/MaterialSelector';
 import DifferencesTable from './components/DifferencesTable';
 import IntelligencePanel from './components/IntelligencePanel';
+import ValueAddScores from './components/ValueAddScores';
 
 const categories = [
   'Ball Bearings',
@@ -23,6 +24,7 @@ function App() {
   const [materialAId, setMaterialAId] = useState('');
   const [materialBId, setMaterialBId] = useState('');
   const [comparison, setComparison] = useState(null);
+  const [showMockupNote, setShowMockupNote] = useState(false);
 
   const categoryMaterials = useMemo(
     () => MATERIALS.filter((item) => item.category === category),
@@ -41,6 +43,11 @@ function App() {
 
   const onCompare = () => {
     setComparison(compareMaterials(materialA, materialB));
+  };
+
+  const onAskFathimAI = () => {
+    setShowMockupNote(true);
+    window.setTimeout(() => setShowMockupNote(false), 2400);
   };
 
   return (
@@ -78,9 +85,18 @@ function App() {
               disabled={!categoryMaterials.length}
             />
           </div>
-          <button className="compare-button" onClick={onCompare} disabled={!materialA || !materialB || materialAId === materialBId}>
-            Compare
-          </button>
+
+          <div className="action-row">
+            <button className="compare-button" onClick={onCompare} disabled={!materialA || !materialB || materialAId === materialBId}>
+              Compare
+            </button>
+            <div className="mockup-wrap">
+              <button className="fathim-button" onClick={onAskFathimAI} type="button">
+                Ask FathimAI
+              </button>
+              {showMockupNote && <span className="mockup-toast">FathimAI is a mockup in this version.</span>}
+            </div>
+          </div>
         </section>
 
         {comparison && (
@@ -91,6 +107,7 @@ function App() {
         )}
 
         <DifferencesTable materialA={materialA} materialB={materialB} />
+        {comparison && <ValueAddScores materialA={materialA} materialB={materialB} comparison={comparison} />}
         <IntelligencePanel materialA={materialA} materialB={materialB} comparison={comparison} />
       </main>
     </div>
