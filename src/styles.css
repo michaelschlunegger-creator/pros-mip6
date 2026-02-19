@@ -127,3 +127,35 @@ details summary { cursor: pointer; font-weight: 700; margin-bottom: .9rem; }
 @media (max-width: 900px) {
   .controls-grid, .feature-grid { grid-template-columns: 1fr; }
 }
+
+
+.feature-card p {
+  margin: .35rem 0;
+  color: var(--muted);
+  font-size: .88rem;
+}
+
+.feature-detail-block {
+  margin-top: .4rem;
+  border: 1px solid rgba(20,33,63,0.08);
+  border-radius: 10px;
+  padding: .35rem .5rem;
+  background: rgba(255,255,255,0.35);
+}
+
+.feature-detail-block summary {
+  margin-bottom: .3rem;
+  font-size: .82rem;
+  font-weight: 700;
+}
+
+.feature-detail-block ul {
+  margin: 0;
+  padding-left: 1rem;
+  color: var(--muted);
+}
+
+.feature-detail-block li {
+  margin-bottom: .18rem;
+  font-size: .82rem;
+}
