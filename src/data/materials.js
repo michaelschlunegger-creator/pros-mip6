@@ -1,4 +1,4 @@
-export const MATERIALS = [
+const RAW_MATERIALS = [
   {'id': 'SCR-001', 'category': 'Screws', 'fullName': 'Hex Head Bolt M8 x 30mm 8.8 Zinc plated Variant 1', 'standard': 'DIN 933', 'diameter': 'M8', 'length': '30mm', 'size': null, 'materialGrade': '8.8', 'coating': 'Zinc plated', 'tolerance': '6g', 'loadRating': '12.0 kN', 'pressureRating': null, 'temperatureRange': '-30..150°C', 'brand': 'Bossard', 'cost': 0.47, 'sustainabilityScore': 71, 'applicationNotes': 'Used for machine frame assembly where clamp consistency and corrosion profile are critical.'},
   {'id': 'SCR-002', 'category': 'Screws', 'fullName': 'Hex Head Bolt M8 x 30mm 8.8 Zinc plated Variant 2', 'standard': 'DIN 933', 'diameter': 'M8', 'length': '30mm', 'size': null, 'materialGrade': '8.8', 'coating': 'Zinc plated', 'tolerance': '6g', 'loadRating': '12.8 kN', 'pressureRating': null, 'temperatureRange': '-40..180°C', 'brand': 'Wurth', 'cost': 0.5, 'sustainabilityScore': 68, 'applicationNotes': 'Used for machine frame assembly where clamp consistency and corrosion profile are critical.'},
   {'id': 'SCR-003', 'category': 'Screws', 'fullName': 'Hex Head Bolt M8 x 30mm 8.8 Zinc plated Variant 3', 'standard': 'DIN 933', 'diameter': 'M8', 'length': '30mm', 'size': null, 'materialGrade': '8.8', 'coating': 'Zinc plated', 'tolerance': '6g', 'loadRating': '13.6 kN', 'pressureRating': null, 'temperatureRange': '-20..100°C', 'brand': 'Bulten', 'cost': 0.53, 'sustainabilityScore': 65, 'applicationNotes': 'Used for machine frame assembly where clamp consistency and corrosion profile are critical.'},
@@ -100,3 +100,105 @@ export const MATERIALS = [
   {'id': 'OTH-099', 'category': 'Fasteners (Other)', 'fullName': 'Rivet Nut M6 Industrial Variant 1', 'standard': 'ISO 15973', 'diameter': 'M6', 'length': null, 'size': null, 'materialGrade': 'Aluminum', 'coating': null, 'tolerance': '6H', 'loadRating': null, 'pressureRating': null, 'temperatureRange': '-20..80°C', 'brand': 'AVK', 'cost': 0.42, 'sustainabilityScore': 69, 'applicationNotes': 'Specialized component used in rotating or retention assemblies requiring dimensional consistency.'},
   {'id': 'OTH-100', 'category': 'Fasteners (Other)', 'fullName': 'Spring Pin 6mm Industrial Variant 2', 'standard': 'ISO 8752', 'diameter': '6mm', 'length': null, 'size': null, 'materialGrade': 'AISI 420', 'coating': null, 'tolerance': 'm6', 'loadRating': null, 'pressureRating': null, 'temperatureRange': '-30..120°C', 'brand': 'SPIROL', 'cost': 0.31, 'sustainabilityScore': 66, 'applicationNotes': 'Specialized component used in rotating or retention assemblies requiring dimensional consistency.'}
 ];
+
+
+const FAMILY_ENRICHMENT = {
+  Screws: {
+    certifications: ['ISO 898-1', 'CE'],
+    sealTypes: ['None'],
+    precisionClasses: ['Standard', 'Fine'],
+    ipRatings: ['N/A'],
+    hazardousAreas: ['Non-Hazardous'],
+  },
+  'Fasteners (Other)': {
+    certifications: ['ISO 15973', 'RoHS'],
+    sealTypes: ['None'],
+    precisionClasses: ['Standard'],
+    ipRatings: ['N/A'],
+    hazardousAreas: ['Non-Hazardous'],
+  },
+  'Ball Bearings': {
+    certifications: ['ISO 492', 'CE'],
+    sealTypes: ['Open', '2RS', 'ZZ'],
+    precisionClasses: ['P0', 'P6', 'P5'],
+    ipRatings: ['N/A'],
+    hazardousAreas: ['Non-Hazardous'],
+  },
+  Valves: {
+    certifications: ['API 598', 'PED 2014/68/EU', 'ATEX'],
+    sealTypes: ['PTFE', 'Graphite', 'Metal Seat'],
+    precisionClasses: ['Class IV', 'Class V', 'Class VI'],
+    ipRatings: ['N/A'],
+    hazardousAreas: ['Zone 2', 'Non-Hazardous'],
+  },
+  Gaskets: {
+    certifications: ['EN 13555', 'FDA', 'WRAS'],
+    sealTypes: ['Spiral Wound', 'Compressed Fiber', 'PTFE Envelope'],
+    precisionClasses: ['Standard', 'Tight Finish'],
+    ipRatings: ['N/A'],
+    hazardousAreas: ['Non-Hazardous', 'Zone 2'],
+  },
+  Seals: {
+    certifications: ['DIN 3760', 'FDA', 'ISO 6194'],
+    sealTypes: ['NBR', 'FKM', 'HNBR', 'PTFE'],
+    precisionClasses: ['R21', 'R23', 'R26'],
+    ipRatings: ['N/A'],
+    hazardousAreas: ['Non-Hazardous', 'Zone 2'],
+  },
+  Bushings: {
+    certifications: ['ISO 4379', 'RoHS'],
+    sealTypes: ['None', 'Labyrinth'],
+    precisionClasses: ['H7', 'H8', 'P7'],
+    ipRatings: ['N/A'],
+    hazardousAreas: ['Non-Hazardous'],
+  },
+  'Hydraulic Fittings': {
+    certifications: ['ISO 1179', 'ISO 8434', 'PED 2014/68/EU'],
+    sealTypes: ['ED Seal', 'FKM', 'EPDM'],
+    precisionClasses: ['Standard', 'Leak-Tight'],
+    ipRatings: ['N/A'],
+    hazardousAreas: ['Zone 1', 'Zone 2', 'Non-Hazardous'],
+  },
+  'Electric Motors': {
+    certifications: ['IEC 60034', 'UL', 'ATEX'],
+    sealTypes: ['None'],
+    precisionClasses: ['IE2', 'IE3', 'IE4'],
+    ipRatings: ['IP55', 'IP65', 'IP66'],
+    hazardousAreas: ['Non-Hazardous', 'Zone 2'],
+  },
+  Couplings: {
+    certifications: ['DIN 740', 'AGMA 9008'],
+    sealTypes: ['None', 'Elastomer Insert'],
+    precisionClasses: ['T7', 'T9', 'T10'],
+    ipRatings: ['N/A'],
+    hazardousAreas: ['Non-Hazardous'],
+  },
+};
+
+const pickByIndex = (list, seed) => list[seed % list.length];
+const numberFromId = (id) => Number((id || '').replace(/\D/g, '').slice(-2) || 1);
+
+const enrichMaterial = (item) => {
+  const profile = FAMILY_ENRICHMENT[item.category] || {
+    certifications: ['General Compliance'],
+    sealTypes: ['Generic'],
+    precisionClasses: ['Standard'],
+    ipRatings: ['N/A'],
+    hazardousAreas: ['Non-Hazardous'],
+  };
+
+  const seed = numberFromId(item.id);
+  const pressureClass = item.pressureRating || (item.loadRating ? `Class-${Math.max(150, seed * 5)}` : null);
+
+  return {
+    ...item,
+    certification: item.certification || pickByIndex(profile.certifications, seed),
+    sealType: item.sealType || pickByIndex(profile.sealTypes, seed + 1),
+    precisionClass: item.precisionClass || pickByIndex(profile.precisionClasses, seed + 2),
+    ipRating: item.ipRating || pickByIndex(profile.ipRatings, seed + 3),
+    hazardousArea: item.hazardousArea || pickByIndex(profile.hazardousAreas, seed + 4),
+    pressureClass,
+  };
+};
+
+export const MATERIALS = RAW_MATERIALS.map(enrichMaterial);

@@ -63,7 +63,6 @@ h1 { font-size: clamp(1.15rem, 2vw, 1.5rem); }
 .control-group { display: grid; gap: .4rem; font-size: .9rem; color: var(--muted); }
 select { background: var(--surface-alt); color: var(--text); border: 1px solid var(--border); border-radius: 10px; padding: .65rem; }
 .compare-button {
-  margin-top: .85rem;
   background: linear-gradient(160deg, #36b355, #249645);
   color: #ffffff;
   border: 1px solid #237a34;
@@ -336,4 +335,104 @@ details summary { cursor: pointer; font-weight: 700; margin-bottom: .9rem; }
   .fathim-button {
     width: 100%;
   }
+}
+
+.workflow-summary {
+  margin-bottom: .9rem;
+  border: 1px solid rgba(20,33,63,0.1);
+  border-radius: 14px;
+  padding: .8rem;
+  background: rgba(255,255,255,0.42);
+}
+
+.workflow-summary h3 {
+  margin: 0 0 .3rem;
+  font-size: .98rem;
+}
+
+.workflow-narrative {
+  margin: 0 0 .6rem;
+  color: var(--muted);
+  font-size: .84rem;
+}
+
+.workflow-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: .6rem;
+  margin-bottom: .6rem;
+}
+
+.workflow-card {
+  border: 1px solid rgba(20,33,63,0.1);
+  border-radius: 10px;
+  padding: .55rem;
+  background: rgba(255,255,255,0.36);
+}
+
+.workflow-card h4 {
+  margin: 0 0 .35rem;
+  font-size: .82rem;
+}
+
+.workflow-card ul,
+.workflow-card ol {
+  margin: 0;
+  padding-left: 1rem;
+}
+
+.workflow-card li {
+  font-size: .8rem;
+  color: var(--muted);
+  margin-bottom: .2rem;
+}
+
+.severity-badge {
+  font-size: .66rem;
+  border-radius: 999px;
+  padding: .12rem .34rem;
+  margin-right: .3rem;
+  border: 1px solid rgba(20,33,63,0.16);
+}
+
+.severity-badge.medium { background: rgba(255,188,80,0.2); color: #8a5b03; }
+.severity-badge.high { background: rgba(247,124,124,0.22); color: #8a1f2e; }
+.severity-badge.critical { background: rgba(189,49,49,0.24); color: #78131e; }
+
+.check-question {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: .35rem;
+}
+
+.action-meta {
+  font-size: .75rem;
+  color: var(--muted);
+}
+
+.confidence-meter {
+  margin-top: .55rem;
+}
+
+.confidence-meter-label {
+  font-size: .78rem;
+  margin-bottom: .22rem;
+}
+
+.confidence-meter-track {
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(20,33,63,0.12);
+  overflow: hidden;
+}
+
+.confidence-meter-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #7aa7ff, #37b36b);
+}
+
+@media (max-width: 900px) {
+  .workflow-grid { grid-template-columns: 1fr; }
 }
