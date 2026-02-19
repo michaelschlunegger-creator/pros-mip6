@@ -436,3 +436,21 @@ details summary { cursor: pointer; font-weight: 700; margin-bottom: .9rem; }
 @media (max-width: 900px) {
   .workflow-grid { grid-template-columns: 1fr; }
 }
+
+
+.question-subtext {
+  font-size: .74rem;
+  color: var(--muted);
+  margin-top: .12rem;
+}
+
+.recommendation-card {
+  margin-top: .6rem;
+  border-color: rgba(62, 118, 235, 0.25);
+  background: linear-gradient(160deg, rgba(255,255,255,0.4), rgba(236,243,255,0.58));
+}
+
+.recommendation-card ul {
+  margin: 0;
+  padding-left: 1rem;
+}
