@@ -19,6 +19,14 @@ const categories = [
   'Fasteners (Other)',
 ];
 
+const fathimHints = [
+  'Can I downgrade this spec safely?',
+  'How do I validate equivalence?',
+  'What’s the quickest saving lever?',
+  'Any risks with lead time?',
+  'Which change is low effort?',
+];
+
 function App() {
   const [category, setCategory] = useState('Screws');
   const [materialAId, setMaterialAId] = useState('');

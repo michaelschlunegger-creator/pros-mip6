@@ -63,6 +63,7 @@ h1 { font-size: clamp(1.15rem, 2vw, 1.5rem); }
 .control-group { display: grid; gap: .4rem; font-size: .9rem; color: var(--muted); }
 select { background: var(--surface-alt); color: var(--text); border: 1px solid var(--border); border-radius: 10px; padding: .65rem; }
 .compare-button {
+  margin-top: .85rem;
   background: linear-gradient(160deg, #36b355, #249645);
   color: #ffffff;
   border: 1px solid #237a34;
