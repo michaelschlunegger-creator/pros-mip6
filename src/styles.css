@@ -454,3 +454,63 @@ details summary { cursor: pointer; font-weight: 700; margin-bottom: .9rem; }
   margin: 0;
   padding-left: 1rem;
 }
+
+.score-row-clickable {
+  cursor: pointer;
+  transition: background-color .15s ease;
+}
+
+.score-row-clickable:hover {
+  background: rgba(77, 124, 255, 0.08);
+}
+
+.detail-link {
+  border: 1px solid rgba(20,33,63,0.18);
+  background: rgba(255,255,255,0.78);
+  border-radius: 999px;
+  padding: .2rem .55rem;
+  font-size: .75rem;
+  color: #1d3e9f;
+  cursor: pointer;
+}
+
+.feature-detail-page h1 {
+  margin-top: .25rem;
+}
+
+.detail-short {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.feature-detail-page h2 {
+  margin-top: 1rem;
+  margin-bottom: .45rem;
+}
+
+.feature-detail-page p,
+.feature-detail-page li {
+  color: var(--muted);
+}
+
+.detail-nav-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: .75rem;
+}
+
+.back-button,
+.main-menu-link {
+  border: 1px solid rgba(20,33,63,0.2);
+  border-radius: 10px;
+  padding: .45rem .7rem;
+  background: rgba(255,255,255,0.85);
+  color: #193b9f;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.back-button {
+  cursor: pointer;
+}
