@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redirecting…</title>
+    <script>
+      (function () {
+        var base = '/pros-mip6';
+        var pathname = window.location.pathname || '/';
+        var withoutBase = pathname.indexOf(base) === 0 ? pathname.slice(base.length) : pathname;
+        var routePath = withoutBase + (window.location.search || '');
+        var normalized = routePath.indexOf('/') === 0 ? routePath : '/' + routePath;
+        var target = base + '/#' + normalized;
+        window.location.replace(target);
+      })();
+    </script>
+  </head>
+  <body>
+    <p>Redirecting…</p>
+  </body>
+</html>
