@@ -6,10 +6,14 @@ function FeatureDetailPage({ slug }) {
   const feature = useMemo(() => FEATURE_DETAILS_BY_SLUG[slug], [slug]);
 
   const handleBack = () => {
-    if (window.history.length > 1) {
+    const referrer = document.referrer;
+    const hasSameOriginReferrer = referrer && referrer.startsWith(window.location.origin);
+
+    if (window.history.length > 1 && hasSameOriginReferrer) {
       window.history.back();
       return;
     }
+
     navigateTo('/');
   };
 

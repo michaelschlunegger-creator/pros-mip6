@@ -21,6 +21,14 @@ const categories = [
   'Fasteners (Other)',
 ];
 
+function AppHeader() {
+  return (
+    <header className="top-nav">
+      <div className="brand">CODA • PROSOL MIP (Repo6)</div>
+    </header>
+  );
+}
+
 function MainDashboard() {
   const [category, setCategory] = useState('Screws');
   const [materialAId, setMaterialAId] = useState('');
@@ -54,9 +62,7 @@ function MainDashboard() {
 
   return (
     <>
-      <header className="top-nav">
-        <div className="brand">CODA • PROSOL MIP (Repo6)</div>
-      </header>
+      <AppHeader />
 
       <main className="content">
         <section className="panel">
@@ -127,9 +133,10 @@ function App() {
   const path = useHashPath();
 
   if (path.startsWith('/feature/')) {
-    const slug = path.replace('/feature/', '').split('/')[0];
+    const slug = path.slice('/feature/'.length).split('/')[0];
     return (
       <div className="app-shell">
+        <AppHeader />
         <FeatureDetailPage slug={slug} />
       </div>
     );
