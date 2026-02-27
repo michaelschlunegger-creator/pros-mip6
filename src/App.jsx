@@ -5,6 +5,8 @@ import MaterialSelector from './components/MaterialSelector';
 import DifferencesTable from './components/DifferencesTable';
 import IntelligencePanel from './components/IntelligencePanel';
 import ValueAddScores from './components/ValueAddScores';
+import FeatureDetailPage from './components/FeatureDetailPage';
+import { navigateTo, useHashPath } from './utils/hashRouting';
 
 const categories = [
   'Ball Bearings',
@@ -19,15 +21,15 @@ const categories = [
   'Fasteners (Other)',
 ];
 
-const fathimHints = [
-  'Can I downgrade this spec safely?',
-  'How do I validate equivalence?',
-  'What’s the quickest saving lever?',
-  'Any risks with lead time?',
-  'Which change is low effort?',
-];
+function AppHeader() {
+  return (
+    <header className="top-nav">
+      <div className="brand">CODA • PROSOL MIP (Repo6)</div>
+    </header>
+  );
+}
 
-function App() {
+function MainDashboard() {
   const [category, setCategory] = useState('Screws');
   const [materialAId, setMaterialAId] = useState('');
   const [materialBId, setMaterialBId] = useState('');
@@ -59,10 +61,8 @@ function App() {
   };
 
   return (
-    <div className="app-shell">
-      <header className="top-nav">
-        <div className="brand">CODA • PROSOL MIP (Repo2)</div>
-      </header>
+    <>
+      <AppHeader />
 
       <main className="content">
         <section className="panel">
@@ -115,9 +115,36 @@ function App() {
         )}
 
         <DifferencesTable materialA={materialA} materialB={materialB} />
-        {comparison && <ValueAddScores materialA={materialA} materialB={materialB} comparison={comparison} />}
+        {comparison && (
+          <ValueAddScores
+            materialA={materialA}
+            materialB={materialB}
+            comparison={comparison}
+            onOpenFeature={navigateTo}
+          />
+        )}
         <IntelligencePanel materialA={materialA} materialB={materialB} comparison={comparison} />
       </main>
+    </>
+  );
+}
+
+function App() {
+  const path = useHashPath();
+
+  if (path.startsWith('/feature/')) {
+    const slug = path.slice('/feature/'.length).split('/')[0];
+    return (
+      <div className="app-shell">
+        <AppHeader />
+        <FeatureDetailPage slug={slug} />
+      </div>
+    );
+  }
+
+  return (
+    <div className="app-shell">
+      <MainDashboard />
     </div>
   );
 }
