@@ -4,7 +4,8 @@ const BASENAME = '/pros-mip6';
 
 const normalizePath = (path) => {
   if (!path) return '/';
-  return path.startsWith('/') ? path : `/${path}`;
+  const normalized = path.startsWith('/') ? path : `/${path}`;
+  return normalized.length > 1 ? normalized.replace(/\/+$/, '') : normalized;
 };
 
 const stripBase = (path) => {
@@ -30,9 +31,14 @@ export const useHashPath = () => {
   const [path, setPath] = useState(getCurrentPath());
 
   useEffect(() => {
-    const onHashChange = () => setPath(getCurrentPath());
-    window.addEventListener('hashchange', onHashChange);
-    return () => window.removeEventListener('hashchange', onHashChange);
+    const syncPath = () => setPath(getCurrentPath());
+    window.addEventListener('hashchange', syncPath);
+    window.addEventListener('popstate', syncPath);
+
+    return () => {
+      window.removeEventListener('hashchange', syncPath);
+      window.removeEventListener('popstate', syncPath);
+    };
   }, []);
 
   return path;

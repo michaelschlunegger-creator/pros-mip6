@@ -83,6 +83,7 @@ function ValueAddScores({ materialA, materialB, comparison, onOpenFeature }) {
                   <button
                     type="button"
                     className="detail-link"
+                    aria-label={`View details for ${feature.title}`}
                     onClick={(event) => {
                       event.stopPropagation();
                       onOpenFeature(`/feature/${feature.slug}`);

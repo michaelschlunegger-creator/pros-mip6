@@ -7,8 +7,11 @@
     <script>
       (function () {
         var base = '/pros-mip6';
-        var path = window.location.pathname.replace(base, '') + window.location.search + window.location.hash;
-        var target = base + '/#' + (path.startsWith('/') ? path : '/' + path);
+        var pathname = window.location.pathname || '/';
+        var withoutBase = pathname.indexOf(base) === 0 ? pathname.slice(base.length) : pathname;
+        var routePath = withoutBase + (window.location.search || '');
+        var normalized = routePath.indexOf('/') === 0 ? routePath : '/' + routePath;
+        var target = base + '/#' + normalized;
         window.location.replace(target);
       })();
     </script>

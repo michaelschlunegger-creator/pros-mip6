@@ -133,7 +133,7 @@ function App() {
   const path = useHashPath();
 
   if (path.startsWith('/feature/')) {
-    const slug = path.slice('/feature/'.length).split('/')[0];
+    const slug = decodeURIComponent(path.slice('/feature/'.length).split('/')[0]);
     return (
       <div className="app-shell">
         <AppHeader />
