@@ -1,12 +1,11 @@
-# PROSOL MIP
+# PROSOL MIP6
 
-No-build GitHub Pages demo for duplicate resolution.
+GitHub Pages deployment for the MIP6 repository.
 
-## How to view
+## Live site
 
-Open the GitHub Pages site URL:
+https://michaelschlunegger-creator.github.io/pros-mip6/
 
-`https://<user>.github.io/<repo>/`
+## Repository
 
-This app runs directly from root `index.html` with CDN React and embedded offline data.
-Deployment Test.
+https://github.com/michaelschlunegger-creator/pros-mip6
